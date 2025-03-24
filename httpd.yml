@@ -10,7 +10,7 @@
         dest: /etc/httpd/conf/httpd.conf
         regexp: '^Listen '
         line: "Listen {{ webport }}"
-     notify: Restart httpd
+      notify: Restart httpd
 
   handlers:
     - name: Restart httpd
