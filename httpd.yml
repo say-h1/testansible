@@ -1,0 +1,19 @@
+- name: httpd 설정
+  hosts: all
+  become: yes
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name:  포트 변경
+      lineinfile:
+        dest: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen\s+[0-9]+'
+        line: "Listen {{ webport }}"
+      notify: Restart httpd
+
+  handlers:
+    - name: Restart httpd
+      service:
+        name: httpd
+        state: restarted
